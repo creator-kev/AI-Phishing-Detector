@@ -14,3 +14,8 @@ Simple AI/ML project to detect phishing URLs/emails.
 2. source venv/bin/activate
 3. pip install -r requirements.txt
 4. jupyter notebook (open notebooks/exploration.ipynb)
+
+## Dataset
+- Source: [Kaggle - Phishing Website Detector](https://www.kaggle.com/datasets/eswarchandt/phishing-website-detector)
+- Saved locally under `data/phishing.csv`
+- Label column: `Result` (1 = phishing, -1 = legitimate)
