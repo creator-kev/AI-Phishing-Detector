@@ -24,3 +24,46 @@ Thumbs.db
 *.idea/
 *.vscode/
 
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment
+venv/
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# Model files / Pickle backups
+*.pkl
+
+# Logs
+*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Environment / IDE files
+.env
+*.idea/
+*.vscode/
+
+# Dataset files (if large, you can store them elsewhere)
+data/*.csv
+data/*.xlsx
+data/*.json
+
+# Temporary files
+tmp/
+*.tmp
+*.bak
+
+# Outputs from ML training (models, logs, checkpoints)
+models/*.h5
+models/*.pt
+models/*.joblib
+checkpoints/
+outputs/
+results/
