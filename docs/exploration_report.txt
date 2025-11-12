@@ -1,0 +1,37 @@
+AI PHISHING DETECTOR - DATA EXPLORATION REPORT
+======================================================================
+Date: 2025-11-12 04:41:59
+Dataset: /home/kali/AI_Phishing_Detector/data/phishing.csv
+
+DATASET OVERVIEW
+----------------------------------------------------------------------
+Shape: 80 rows × 2 columns
+Memory: 6.93 KB
+
+COLUMNS
+----------------------------------------------------------------------
+1. url (object)
+2. class (int64)
+
+LABEL DISTRIBUTION
+----------------------------------------------------------------------
+0 (Legitimate): 40 (50.00%)
+1 (Phishing): 40 (50.00%)
+
+Class Balance Ratio: 1.00:1
+
+DATA QUALITY
+----------------------------------------------------------------------
+Total samples: 80
+Complete cases (no missing): 80
+Duplicate rows: 0
+Minimum samples per class: 40
+Class balance ratio: 1.00:1
+
+URL STATISTICS
+----------------------------------------------------------------------
+Min length: 18
+Max length: 44
+Mean length: 30.06
+URLs with IP: 4
+
