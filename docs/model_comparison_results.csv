@@ -1,0 +1,4 @@
+Model,Accuracy,Precision,Recall,F1-Score,CV Mean,Train Time (s)
+Random Forest,1.0000,1.0000,1.0000,1.0000,1.0000,1.36
+Gradient Boosting,1.0000,1.0000,1.0000,1.0000,0.9988,1.70
+Logistic Regression,1.0000,1.0000,1.0000,1.0000,1.0000,0.16

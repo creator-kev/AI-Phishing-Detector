@@ -92,6 +92,12 @@ phishing_urls = [
     "http://fedex-package-delivery.tk/track",
     "http://ups-delivery-failed.com/reschedule",
     "http://dhl-customs-payment.xyz/pay",
+"https://secure-login.bank-example.test/account/signin?user=alice&redirect=https%3A%2F%2Fexample.com",
+    "http://login.verify-example.test@safe.example.com/update",
+    "http://192.0.2.123/confirm.php?ref=ABCD-1234&email=support@example.test",
+    "https://accounts.example.test.secure-login.example.com/wp-admin/login.php",
+    "http://very-long-subdomain.lots.of.dots.subdomain.example.test/path/to/resource/with/a/very/long/name",
+
 ]
 
 # Create DataFrame
