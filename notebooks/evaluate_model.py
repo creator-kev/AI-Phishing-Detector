@@ -42,7 +42,7 @@ from app.feature_extractor import StandardURLFeatureExtractor
 SCRIPT_PATH = Path(__file__).resolve()
 PROJECT_ROOT = SCRIPT_PATH.parents[1]
 DATA_PATH = PROJECT_ROOT / "data" / "phishing.csv"
-MODEL_PATH = PROJECT_ROOT / "models" / "phishing_pipeline.pkl"
+MODEL_PATH = PROJECT_ROOT / "models" / "best_model.pkl"
 DOCS_PATH = PROJECT_ROOT / "docs"
 
 # Create docs directory

@@ -9,3 +9,11 @@ streamlit
 requests
 beautifulsoup4
 python-whois
+flask-limiter
+flask-caching 
+flask-cors 
+python-dotenv 
+pyjwt 
+flasgger 
+redis
+gunicorn>=21.2.0

@@ -1,9 +1,9 @@
 AI PHISHING DETECTOR - EVALUATION REPORT
 ======================================================================
-Date: 2025-11-16 07:17:33
+Date: 2025-11-22 11:48:27
 Model: /home/kali/AI_Phishing_Detector/models/phishing_pipeline.pkl
 Dataset: /home/kali/AI_Phishing_Detector/data/phishing.csv
-Test Samples: 17
+Test Samples: 18
 
 PERFORMANCE METRICS
 ----------------------------------------------------------------------
@@ -15,7 +15,7 @@ ROC AUC:   1.0000
 
 CONFUSION MATRIX
 ----------------------------------------------------------------------
-True Negatives:  8
+True Negatives:  9
 False Positives: 0
 False Negatives: 0
 True Positives:  9
@@ -24,9 +24,9 @@ CLASSIFICATION REPORT
 ----------------------------------------------------------------------
               precision    recall  f1-score   support
 
-  Legitimate       1.00      1.00      1.00         8
+  Legitimate       1.00      1.00      1.00         9
     Phishing       1.00      1.00      1.00         9
 
-    accuracy                           1.00        17
-   macro avg       1.00      1.00      1.00        17
-weighted avg       1.00      1.00      1.00        17
+    accuracy                           1.00        18
+   macro avg       1.00      1.00      1.00        18
+weighted avg       1.00      1.00      1.00        18

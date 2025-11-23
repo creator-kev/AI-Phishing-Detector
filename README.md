@@ -436,3 +436,199 @@ MIT License - see LICENSE file for details
 **⚡ Made with ❤️ and Machine Learning**
 
 *Protect yourself and others from phishing attacks. Share this project!*
+
+
+# 🛡️ AI Phishing Detector - Browser Extension
+
+Real-time phishing protection powered by AI machine learning.
+
+## Features
+
+- ⚡ **Real-time Detection**: Automatically checks every URL you visit
+- 🚨 **Visual Warnings**: Red banner alerts on phishing sites
+- 🔔 **Smart Notifications**: Get notified about threats
+- 📊 **Statistics Tracking**: Monitor threats blocked
+- 🎯 **Form Protection**: Warns before submitting credentials on suspicious sites
+- 💾 **Smart Caching**: Reduces API calls, works offline
+- ⚙️ **Customizable**: Toggle features on/off
+
+## Installation
+
+See [INSTALL.md](INSTALL.md) for detailed instructions.
+
+**Quick Start:**
+1. Load unpacked extension in Chrome (`chrome://extensions`)
+2. Enable Developer Mode
+3. Make sure Flask API is running on port 5000
+4. Start browsing safely!
+
+## Usage
+
+### Automatic Protection
+Simply browse normally. The extension automatically:
+- Checks every URL you visit
+- Shows warning banners on phishing sites
+- Blocks suspicious form submissions
+- Tracks statistics
+
+### Manual Check
+1. Click the extension icon
+2. View current page status
+3. Click "Check Again" to re-scan
+
+### Settings
+Configure in the extension popup:
+- **Notifications**: Toggle desktop notifications
+- **Auto-Check**: Enable/disable automatic scanning
+- **Show Warnings**: Display warning banners
+
+## Technical Details
+
+### Architecture
+```
+┌─────────────────┐
+│  Content Script │ ← Monitors page, shows warnings
+└────────┬────────┘
+         │
+┌────────▼────────┐
+│ Background SW   │ ← Checks URLs, caches results
+└────────┬────────┘
+         │
+┌────────▼────────┐
+│   Popup UI      │ ← User interface
+└────────┬────────┘
+         │
+┌────────▼────────┐
+│   Flask API     │ ← ML model (127.0.0.1:5000)
+└─────────────────┘
+```
+
+### API Integration
+- Endpoint: `http://127.0.0.1:5000/api/predict`
+- Method: POST
+- Body: `{"text": "url_to_check"}`
+- Cache: 30 minutes per URL
+
+### Storage
+- **Sync Storage**: User settings (notifications, auto-check, etc.)
+- **Local Storage**: Statistics (URLs checked, threats blocked)
+- **Memory Cache**: Recent URL checks (30 min TTL)
+
+## Screenshots
+
+### Popup Interface
+![Popup](screenshots/popup.png)
+- Shows current URL status
+- Real-time confidence meter
+- Quick settings toggles
+
+### Warning Banner
+![Warning](screenshots/warning.png)
+- Prominent red banner
+- Clear action buttons
+- Dismissible
+
+### Safe Site
+![Safe](screenshots/safe.png)
+- Green status indicator
+- Confidence percentage
+
+## Privacy
+
+- ✅ **Local Processing**: All checks happen via your local API
+- ✅ **No Data Collection**: Extension doesn't collect or send data to third parties
+- ✅ **No Tracking**: No analytics or tracking scripts
+- ✅ **Open Source**: Full source code available for review
+
+## Requirements
+
+- Chrome 88+ / Firefox 78+ / Edge 88+
+- Flask API running on `http://127.0.0.1:5000`
+- Python 3.8+ with AI Phishing Detector installed
+
+## Development
+
+### File Structure
+```
+browser-extension/
+├── manifest.json          # Extension manifest
+├── popup.html            # Popup interface
+├── js/
+│   ├── popup.js         # Popup logic
+│   ├── background.js    # Background service worker
+│   └── content.js       # Content script
+├── css/
+│   └── warning.css      # Warning styles
+├── icons/
+│   ├── icon16.png       # 16x16 icon
+│   ├── icon48.png       # 48x48 icon
+│   └── icon128.png      # 128x128 icon
+└── README.md
+```
+
+### Testing
+```bash
+# Start Flask API
+cd ~/AI_Phishing_Detector
+source venv/bin/activate
+python3 app/main.py
+
+# Test API
+curl -X POST http://127.0.0.1:5000/api/predict \
+  -H "Content-Type: application/json" \
+  -d '{"text":"http://paypal-verify.tk"}'
+```
+
+## Troubleshooting
+
+### Common Issues
+
+**Extension doesn't load:**
+- Check Developer Mode is enabled
+- Verify all files are in correct locations
+- Check browser console for errors
+
+**"Could not connect to API":**
+- Ensure Flask app is running
+- Check port 5000 is accessible
+- Verify CORS settings
+
+**Warning banner doesn't show:**
+- Check "Show Warnings" is enabled in settings
+- Verify content script is injected
+- Check page console for errors
+
+**No notifications:**
+- Enable "Notifications" in extension settings
+- Grant notification permission in browser
+- Check browser notification settings
+
+## Contributing
+
+Contributions welcome! Please:
+1. Fork the repository
+2. Create a feature branch
+3. Submit a pull request
+
+## License
+
+MIT License - See LICENSE file
+
+## Credits
+
+Built with ❤️ using:
+- Machine Learning (Scikit-learn, XGBoost)
+- Flask API
+- Chrome Extension APIs
+- Modern JavaScript (ES6+)
+
+## Support
+
+- 📧 Email: support@example.com
+- 🐛 Issues: GitHub Issues
+- 💬 Discord: [Join Server](#)
+
+---
+
+**Stay Safe Online! 🛡️**
+

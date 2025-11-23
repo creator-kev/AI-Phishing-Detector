@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Phishing Detector</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            width: 400px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+        }
+        
+        .header {
+            background: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+        }
+        
+        h1 {
+            font-size: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+        }
+        
+        .subtitle {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .content {
+            padding: 20px;
+        }
+        
+        .status-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .status-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .status-icon {
+            font-size: 32px;
+        }
+        
+        .status-text h2 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        
+        .status-text p {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .status-safe {
+            color: #28a745;
+        }
+        
+        .status-danger {
+            color: #dc3545;
+        }
+        
+        .status-checking {
+            color: #ffc107;
+        }
+        
+        .url-display {
+            background: #f7fafc;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-family: 'Courier New', monospace;
+            word-break: break-all;
+            margin-bottom: 15px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .confidence-bar {
+            margin: 15px 0;
+        }
+        
+        .confidence-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.3s, background 0.3s;
+        }
+        
+        .progress-safe {
+            background: linear-gradient(90deg, #28a745 0%, #20c997 100%);
+        }
+        
+        .progress-danger {
+            background: linear-gradient(90deg, #dc3545 0%, #f56565 100%);
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 10px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #f7fafc;
+            color: #4a5568;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .btn-secondary:hover {
+            background: #edf2f7;
+        }
+        
+        .settings {
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+        
+        .setting-label {
+            font-size: 13px;
+            color: #4a5568;
+        }
+        
+        .toggle {
+            position: relative;
+            width: 50px;
+            height: 24px;
+            background: #cbd5e0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .toggle.active {
+            background: #667eea;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+        
+        .toggle.active .toggle-slider {
+            transform: translateX(26px);
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .stat-box {
+            background: #f7fafc;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .stat-label {
+            font-size: 11px;
+            color: #718096;
+            margin-top: 5px;
+        }
+        
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .footer {
+            background: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 20px 20px 0 0;
+            margin-top: 15px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            font-size: 12px;
+        }
+        
+        .footer-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🛡️ AI Phishing Detector</h1>
+        <p class="subtitle">Real-time Protection</p>
+    </div>
+    
+    <div class="content">
+        <!-- Status Card -->
+        <div class="status-card" id="statusCard">
+            <div class="status-header">
+                <span class="status-icon" id="statusIcon">🔍</span>
+                <div class="status-text">
+                    <h2 id="statusTitle">Checking URL...</h2>
+                    <p id="statusDescription">Please wait</p>
+                </div>
+            </div>
+            
+            <div class="url-display" id="currentUrl">Loading...</div>
+            
+            <div class="confidence-bar" id="confidenceBar" style="display: none;">
+                <div class="confidence-label">
+                    <span>Confidence</span>
+                    <span id="confidenceValue">0%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
+                </div>
+            </div>
+            
+            <button class="btn btn-primary" id="recheckBtn">
+                🔄 Check Again
+            </button>
+            <button class="btn btn-secondary" id="detailsBtn">
+                📊 View Details
+            </button>
+        </div>
+        
+        <!-- Settings Card -->
+        <div class="settings">
+            <div class="setting-item">
+                <span class="setting-label">🔔 Notifications</span>
+                <div class="toggle active" id="notificationToggle">
+                    <div class="toggle-slider"></div>
+                </div>
+            </div>
+            <div class="setting-item">
+                <span class="setting-label">⚡ Auto-Check</span>
+                <div class="toggle active" id="autoCheckToggle">
+                    <div class="toggle-slider"></div>
+                </div>
+            </div>
+            <div class="setting-item">
+                <span class="setting-label">🎨 Show Warnings</span>
+                <div class="toggle active" id="warningsToggle">
+                    <div class="toggle-slider"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Stats -->
+        <div class="stats">
+            <div class="stat-box">
+                <div class="stat-number" id="checkedCount">0</div>
+                <div class="stat-label">URLs Checked</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="blockedCount">0</div>
+                <div class="stat-label">Threats Blocked</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <div class="footer-links">
+            <a href="#" class="footer-link" id="openDashboard">Dashboard</a>
+            <a href="#" class="footer-link" id="reportIssue">Report</a>
+            <a href="#" class="footer-link" id="settingsLink">Settings</a>
+        </div>
+        <p style="font-size: 10px; color: #999; margin-top: 10px;">v1.0.0</p>
+    </div>
+    
+    <script src="js/popup.js"></script>
+</body>
+</html>

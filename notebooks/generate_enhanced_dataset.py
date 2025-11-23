@@ -17,7 +17,7 @@ LEGITIMATE_DOMAINS = [
     "paypal.com", "bankofamerica.com", "chase.com", "wellsfargo.com", "citi.com",
     "dropbox.com", "adobe.com", "salesforce.com", "zoom.us", "spotify.com",
     "twitch.tv", "medium.com", "wordpress.com", "shopify.com", "stripe.com",
-    "gmail.com", "outlook.com", "yahoo.com", "protonmail.com", "icloud.com"
+    "gmail.com", "outlook.com", "yahoo.com", "protonmail.com", "icloud.com", "vercel.app"
 ]
 
 # Common legitimate paths

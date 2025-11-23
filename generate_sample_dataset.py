@@ -48,6 +48,7 @@ legitimate_urls = [
     "https://www.wsj.com",
     "https://www.forbes.com",
     "https://www.medium.com",
+    "https://mmu-course-hub.vercel.app",
 ]
 
 # Phishing URLs (Class = 1)
