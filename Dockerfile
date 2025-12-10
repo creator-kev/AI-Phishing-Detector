@@ -23,20 +23,13 @@ RUN mkdir -p logs models data
 
 # Set environment variables
 ENV PYTHONUNBUFFERED=1
-ENV PORT=8080
 
-# Expose port
+# Expose port (Railway will still set its own $PORT)
 EXPOSE 8080
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
     CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8080/health')"
 
-# Start command
-CMD gunicorn app.main:app \
-    --workers 2 \
-    --bind 0.0.0.0:$PORT \
-    --timeout 120 \
-    --access-logfile - \
-    --error-logfile - \
-    --log-level info
+# Start command (FIXED: uses shell so ${PORT} expands correctly on Railway)
+CMD ["sh", "-c", "gunicorn app.main:app --workers 2 --bind 0.0.0.0:${PORT} --timeout 120 --access-logfile - --error-logfile - --log-level info"]
